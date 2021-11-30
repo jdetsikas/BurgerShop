@@ -1,4 +1,4 @@
-### do now! each person creates burger
+###do now! each person creates burger
 
 build burgers 6
 build drinks 6
@@ -6,7 +6,7 @@ build list of combos
 sides - french fries..etc.. 6
 
 
-## needs to be done
+##needs to be done
 takeorder function
 	{while loop,print}
 
@@ -20,7 +20,7 @@ user input combo function
 scope of options avaialbe(custom)
 
 
-# notes
+#notes
 
 combo1 [ burger1, drink1,side1]
 combo2 
