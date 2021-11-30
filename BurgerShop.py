@@ -113,9 +113,8 @@ def take_order():
 burger1 = Burger("The AJ", 14.00, "Ciabatta", "Veggie Patty", "Gouda", "medium", "", "Beautifully crafted sandwich on a ciabatta roll "
                                                                     "with a veggie patty, gouda, avocado, onion, "
                                                                     "arugula, and mushroom")
-burger2 = Burger("The AJ", 14.00, "Ciabatta", "Veggie Patty", "Gouda", "medium", "", "Beautifully crafted sandwich on a ciabatta roll "
-                                                                    "with a veggie patty, gouda, avocado, onion, "
-                                                                    "arugula, and mushroom")
+burger2 = Burger("The Big Al", 17.00, "plain", "Sirloin", "American Cheese", "medium rare", "Our biggest burger option!! Filled with a thick soft juicy patty."
+                                                                    "Comes with lettuce,tomato,mayo,and pickles")
 
 burgerList = [burger1, burger2]
 print(burgerList[0].name)
