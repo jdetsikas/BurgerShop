@@ -1,0 +1,24 @@
+build burgers
+build drinks
+build list of combos 
+sides - french fries..etc..
+
+
+
+takeorder function
+	{while loop,print}
+
+combo class 
+structure of order class
+user input side function 
+user input combo function
+
+
+
+scope of options avaialbe(custom)
+
+
+
+combo1 [ burger1, drink1,side1]
+combo2 
+
