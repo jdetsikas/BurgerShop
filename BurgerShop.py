@@ -21,8 +21,6 @@ class FoodItem:
 
 
 class Burger(FoodItem):
-    
-    toppings = ""
 
     def __init__(self, name, price, bun, patty, cheese, temp, toppings, description):
         super().__init__(name, price)
@@ -110,15 +108,21 @@ def take_order():
     print("Welcome to Burger Shop")
 
 
-burger1 = Burger("The AJ", 14.00, "Ciabatta", "Veggie Patty", "Gouda", "medium", "", "Beautifully crafted sandwich on a ciabatta roll "
+burger1 = Burger("The AJ", 14.00, "Ciabatta", "Veggie Patty", "Gouda", "medium", "Beautifully crafted sandwich on a ciabatta roll "
                                                                     "with a veggie patty, gouda, avocado, onion, "
                                                                     "arugula, and mushroom")
-burger2 = Burger("The Big Al", 17.00, "plain", "Sirloin", "American Cheese", "medium rare", "Our biggest burger option!! Filled with a thick soft juicy patty."
-                                                                    "Comes with lettuce,tomato,mayo,and pickles")
+burger2 = Burger("The AJ", 14.00, "Ciabatta", "Veggie Patty", "Gouda", "medium", "Beautifully crafted sandwich on a ciabatta roll "
+                                                                    "with a veggie patty, gouda, avocado, onion, "
+                                                                    "arugula, and mushroom")
+theTripleBypass = Burger("The Triple ByPass", 22.00, "Brioche", "Angus Patty", "Cheddar", "medium", ["grilled onions", "bacon"], \
+    "Six All-American Angus patties topped with cheddar, grilled onions and a mountain of bacon!!! So good that you won't even\
+        regret saying goodbye to your family!")
 
 burgerList = [burger1, burger2]
 print(burgerList[0].name)
-
+# burger_dict = {'The AJ': [14.00, "Veggie Patty", "Gouda", "medium", "Beautifully crafted sandwich on a ciabatta roll "
+#                                                                     "with a veggie patty, gouda, avocado, onion, "
+#                                                                     "arugula, and mushroom"]}
 drink_dict = {}
 
 take_order()
