@@ -140,6 +140,7 @@ menu = {
         "The Triple Bypass" : Burger("The Triple Bypass", 22.00, "Brioche", "Angus Patty", "Cheddar", ["grilled onions", "bacon"], \
             "Six All-American Angus patties topped with cheddar, grilled onions and a mountain of bacon!!! So good that you won't \
                 even regret saying goodbye to your family!"),
+        
         "The Classic": Burger("The classic ", 12.00, "Brioche", "beef Patty", "Cheddar",["lettuce", "onions","tomatoes" ,"mayo", "bacon"],\
                               "Made with 100% pure beef topped with lettuce, onions, tomatoes and cheddar.")
     },
@@ -154,12 +155,21 @@ menu = {
 
     },
 
-    "Drinks" : {
+    beer = ["Corona","Blue Moon", "Stella"],
+    Lemonade = ["Pink", "Original", "Peach"],
+    Smoothie = ["Strawberry Banana", "Mango", "Peanut Butter Banana"],
+
+    "Drinks" = {
         "Soft Drink":Drink("medium","Soft Drink", 1.00),
-        "Smoothie": Drink("medium","strawberry bananna", 2.00),
+        "Smoothie": Drink("medium","flavor", 2.00),
+        "Lemonade": Drink("medium","type",2.00),
+        "Beer": Drink("medium","company",6.00)
 
     }
 }
+
+
+
 
 
 take_order()
