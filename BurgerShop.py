@@ -141,7 +141,7 @@ menu = {
             "Six All-American Angus patties topped with cheddar, grilled onions and a mountain of bacon!!! So good that you won't \
                 even regret saying goodbye to your family!")
         "The classic ": Burger("The classic ", 12.00, "Brioche", "beef Patty", "Cheddar",
-                                    ["lettuce" "onions","tomatoes" "mayo" "bacon"],
+                                    ["lettuce", "onions","tomatoes" ,"mayo", "bacon"],
                                     "made with 100% pure beef topped with lettuce, onions, tomatoes and cheddar.")
     },
 
