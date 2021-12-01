@@ -95,12 +95,13 @@ def user_input_burger():
 
 def user_input_drink():
     # ask user for input and store it in drink object
-    for drink in drink_dict:
-        print(drink)
-    drink_order = input("Which drink would you like? ")
-    d = Drink(drink_order, drink_dict[drink_order])
+    # deprecated, will fix
+    #for drink in drink_dict:
+    #    print(drink)
+    #drink_order = input("Which drink would you like? ")
+    #d = Drink(drink_order, drink_dict[drink_order])
 
-    return d
+    #return d
 
 
 def user_input_side():
@@ -133,7 +134,7 @@ menu = {
         "The AJ" : Burger("The AJ", 14.00, "Ciabatta", "Veggie Patty", "Gouda", ["avocado", "onion", "arugula", "mushrooms"], \
             "Beautifully crafted sandwich on a ciabatta roll with a veggie patty, gouda, avocado, onion, arugula, and mushroom"),
       
-        "The Big Al : Burger("The Big Al", 17.00, "plain", "Sirloin", "American Cheese", ["lettuce", "tomato", "mayo", "pickles"], \
+        "The Big Al" : Burger("The Big Al", 17.00, "plain", "Sirloin", "American Cheese", ["lettuce", "tomato", "mayo", "pickles"], \
             "Our most popular burger option!! Filled with a thick soft juicy patty. Comes with lettuce,tomato,mayo,and pickles"),
       
         "The Triple Bypass" : Burger("The Triple Bypass", 22.00, "Brioche", "Angus Patty", "Cheddar", ["grilled onions", "bacon"], \
