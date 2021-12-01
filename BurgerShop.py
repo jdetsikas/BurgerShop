@@ -32,8 +32,12 @@ class Burger(FoodItem):
         self.bun = bun
         self.patty = patty
         self.cheese = cheese
-        self.toppings = topp
+        for item in topp:
+            self.toppings = topp
         self.description = desc
+        
+    def add_topping(self, topp):
+        self.toppings.append(topp)
 
 class Drink(FoodItem):
     size = ''
@@ -197,15 +201,3 @@ menu = {
 
     }
 }
-
-
-take_order()
-
-##########
-# Tests #
-########
-
-ord = Order()
-ord.add_item(menu["Burgers"]["The Classic"])
-for i in ord.items[0].toppings:
-    print(i)
