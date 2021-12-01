@@ -163,6 +163,9 @@ buns = ["Brioche", "Ciabatta", "Plain"]
 patties = ["Angus", "Beef", "Sirloin", "Veggie", "Chicken Filet"]
 cheeses = ["American", "Cheddar", "Gouda", "Pepperjack"]
 toppings = ["Arugula", "Avocado", "Bacon", "Lettuce", "Mayo", "Mushrooms", "Onion", "Pickles", "Tomato", "Grilled Onions", "Spicy Mayo"]
+beer = ["Corona","Blue Moon", "Stella"],
+lemonade = ["Pink", "Original", "Peach"],
+smoothie = ["Strawberry Banana", "Mango", "Peanut Butter Banana"]
 
 menu = {
     "Burgers" : {
@@ -191,11 +194,9 @@ menu = {
 
     },
 
-    beer = ["Corona","Blue Moon", "Stella"],
-    Lemonade = ["Pink", "Original", "Peach"],
-    Smoothie = ["Strawberry Banana", "Mango", "Peanut Butter Banana"],
+   
 
-    "Drinks" = {
+    "Drinks" : {
         "Soft Drink":Drink("medium","Soft Drink", 1.00),
         "Smoothie": Drink("medium","flavor", 2.00),
         "Lemonade": Drink("medium","type",2.00),
