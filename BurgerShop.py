@@ -167,8 +167,8 @@ buns = ["Brioche", "Ciabatta", "Plain"]
 patties = ["Angus", "Beef", "Sirloin", "Veggie", "Chicken Filet"]
 cheeses = ["American", "Cheddar", "Gouda", "Pepperjack"]
 toppings = ["Arugula", "Avocado", "Bacon", "Lettuce", "Mayo", "Mushrooms", "Onion", "Pickles", "Tomato", "Grilled Onions", "Spicy Mayo"]
-beer = ["Corona","Blue Moon", "Stella"],
-lemonade = ["Pink", "Original", "Peach"],
+beer = ["Corona","Blue Moon", "Stella"]
+lemonade = ["Pink", "Original", "Peach"]
 smoothie = ["Strawberry Banana", "Mango", "Peanut Butter Banana"]
 
 menu = {
@@ -201,10 +201,17 @@ menu = {
    
 
     "Drinks" : {
-        "Soft Drink":Drink("medium","Soft Drink", 1.00),
-        "Smoothie": Drink("medium","flavor", 2.00),
-        "Lemonade": Drink("medium","type",2.00),
-        "Beer": Drink("medium","company",6.00)
+        "Soft Drink": Drink("medium","Soft Drink", 1.00),
+        "Strawberry Banana Smoothie": Drink("medium",smoothie[0], 2.00),
+        "Mango Smoothie": Drink("medium",smoothie[1], 2.00),
+        "Peanut Butter Banana Smoothie": Drink("medium",smoothie[2], 2.00),
+        "Pink Lemonade": Drink("medium",lemonade[0],2.00),
+        "Original Lemonade": Drink("medium",lemonade[1],2.00),
+        "Peach Lemonade": Drink("medium",lemonade[2],2.00),
+        "Corona": Drink("medium",beer[0],6.00), 
+        "Blue Moon" :Drink("medium",beer[1],6.00),
+        "Stella" :Drink("medium",beer[2],6.00),
+       
 
     }
 }
