@@ -142,7 +142,13 @@ menu = {
                 even regret saying goodbye to your family!")
     },
 
-    "Sides" : {
+    "Sides" : { 
+        "French Fries": Side("hand cut fries", 4.99, "medium"),
+        "Classic salad" :Side("romane lettuce,olive oil,crushed garlic,Parmesan cheese,croutons",5.99,"medium"),
+        "Onion rings" :Side("onion dipped in bread crumbs and then deep fried",3.99,"medium"),
+        "Coleslaw" :Side("finely shredded raw cabbage with a salad dressing.",2.00,"small")
+        
+        
 
     },
 
