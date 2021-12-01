@@ -1,69 +1,85 @@
-# Implementing a burger shop
-
+##########################
+# Classes and Variables #
+########################
 
 class FoodItem:
+    name = ''
+    price = ''
 
     def __init__(self, name, price):
         self.name = name
         self.price = price
-
     def set_name(self, name):
         self.name = name
-
     def set_price(self, price):
         self.price = price
-
     def get_name(self):
         return self.name
-
     def get_price(self):
         return self.price
 
-
 class Burger(FoodItem):
+    bun = ''
+    patty = ''
+    cheese = ''
+    toppings = []
+    description = ''
 
-    def __init__(self, name, price, bun, patty, cheese, temp, toppings, description):
+    def __init__(self, name, price, bun, patty, cheese, topp, desc):
         super().__init__(name, price)
         self.bun = bun
         self.patty = patty
         self.cheese = cheese
-        self.temp = temp
-        self.description = description
-
-    def __str__(self):
-        return ""
-
-    def set_patty(self, patty):
-        self.patty = patty
-
-    def set_temp(self, temp):
-        self.temp = temp
-
-    def get_patty(self):
-        return self.patty
-
-    def get_temp(self):
-        return self.temp
-
+        for item in topp:
+            self.toppings.append(item)
+        self.description = desc
 
 class Drink(FoodItem):
-    def __init__(self, name, price):
+    size = ''
+
+    def __init__(self, size, name, price):
         super().__init__(name, price)
+        self.size = size
 
 
 class Side(FoodItem):
-    def __init__(self, name, price):
+    size = ''
+
+    def __init__(self, name, price, size):
         super().__init__(name, price)
+        self.size = size
 
 
 class Combo(FoodItem):
-    def __init__(self, name, price):
+    entree = None
+    side = None
+    drink = None
+
+    def __init__(self, name, price, ent, side, drink):
         super().__init__(name, price)
+        self.entree = ent
+        self.side = side
+        self.drink = drink
 
 
 class Order:
-    pass
+    num = None
+    items = []
+    total = 0
 
+    def __init__(self, item):
+        self.items.append(item)
+    def add_item(self, item):
+        self.items.append(item)
+    def calc_total(self):
+        for it in self.items:
+            self.total += it.get_price()
+        return self.total
+
+
+#####################
+# Helper Functions #
+###################
 
 def user_input_burger():
     # ask user for input and store it in burger object
@@ -108,21 +124,20 @@ def take_order():
     print("Welcome to Burger Shop")
 
 
-burger1 = Burger("The AJ", 14.00, "Ciabatta", "Veggie Patty", "Gouda", "medium", "Beautifully crafted sandwich on a ciabatta roll "
-                                                                    "with a veggie patty, gouda, avocado, onion, "
-                                                                    "arugula, and mushroom")
-burger2 = Burger("The AJ", 14.00, "Ciabatta", "Veggie Patty", "Gouda", "medium", "Beautifully crafted sandwich on a ciabatta roll "
-                                                                    "with a veggie patty, gouda, avocado, onion, "
-                                                                    "arugula, and mushroom")
-theTripleBypass = Burger("The Triple ByPass", 22.00, "Brioche", "Angus Patty", "Cheddar", "medium", ["grilled onions", "bacon"], \
+#
+# V
+#
+
+burger1 = Burger("The AJ", 14.00, "Ciabatta", "Veggie Patty", "Gouda", [], "Beautifully crafted sandwich on a ciabatta roll \
+                                                                    with a veggie patty, gouda, avocado, onion, \
+                                                                    arugula, and mushroom")
+theTripleBypass = Burger("The Triple ByPass", 22.00, "Brioche", "Angus Patty", "Cheddar", ["grilled onions", "bacon"], \
     "Six All-American Angus patties topped with cheddar, grilled onions and a mountain of bacon!!! So good that you won't even\
         regret saying goodbye to your family!")
 
-burgerList = [burger1, burger2]
-print(burgerList[0].name)
-# burger_dict = {'The AJ': [14.00, "Veggie Patty", "Gouda", "medium", "Beautifully crafted sandwich on a ciabatta roll "
-#                                                                     "with a veggie patty, gouda, avocado, onion, "
-#                                                                     "arugula, and mushroom"]}
-drink_dict = {}
 
 take_order()
+
+num36 = Order(burger1)
+num36.add_item(burger1)
+print(num36.calc_total())
