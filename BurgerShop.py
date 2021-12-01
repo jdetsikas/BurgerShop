@@ -95,10 +95,39 @@ def user_input_burger():
         bun = input("What type of bun would you like? ")
         patty = input("What type of patty would you like? ")
         topp = input("What temp would you like it to be cooked? ")
-        b = Burger(name, price, bun, patty, temp)
+        b = Burger(name, price, bun, patty)
 
     return b
 
+def user_create_burger():
+    name = "Custom"
+    price = 8
+    desc = "Built-to-order burger"
+
+    def custom_selection(type, list):
+        print("\nOptions:")
+        print(" 0. None")
+
+        for idx, val in enumerate(list):
+            print(f" {idx + 1}. {val}")
+        
+        userInput = input(f"Please select a {type}: ")
+        choice = ""
+
+        if int(userInput) < 1:
+            choice = "None"
+        else:
+            choice = list[int(userInput) - 1]
+
+        print("Selected", choice)
+        return choice
+    
+    bun = custom_selection("bun", buns)
+    patty = custom_selection("patty", patties)
+    cheese =custom_selection("cheese", cheeses)
+    topp = custom_selection("topping", toppings)
+
+    return Burger(name, price, bun, patty, cheese, topp, desc)
 
 def user_input_drink():
     # ask user for input and store it in drink object
@@ -108,7 +137,7 @@ def user_input_drink():
     #drink_order = input("Which drink would you like? ")
     #d = Drink(drink_order, drink_dict[drink_order])
 
-    return d
+    return
 
 
 def user_input_side():
@@ -199,13 +228,17 @@ menu = {
 }
 
 
-take_order()
-
 ##########
 # Tests #
 ########
 
 ord = Order()
-ord.add_item(menu["Burgers"]["The Classic"])
-for i in ord.items[0].toppings:
-    print(i)
+
+cust = user_create_burger()
+ord.add_item(cust)
+print(ord.items[0].name)
+print(ord.items[0].price)
+print(ord.items[0].bun)
+print(ord.items[0].patty)
+print(ord.items[0].cheese)
+print(ord.items[0].toppings)
