@@ -160,9 +160,9 @@ def take_order():
 #############
 
 buns = ["Brioche", "Ciabatta", "Plain"]
-patties = ["Angus", "Beef", "Sirloin", "Veggie"]
-cheeses = ["American", "Cheddar", "Gouda"]
-toppings = ["Arugula", "Avocado", "Bacon", "Lettuce", "Mayo", "Mushrooms", "Onion", "Pickles", "Tomato", "Grilled Onions"]
+patties = ["Angus", "Beef", "Sirloin", "Veggie", "Chicken Filet"]
+cheeses = ["American", "Cheddar", "Gouda", "Pepperjack"]
+toppings = ["Arugula", "Avocado", "Bacon", "Lettuce", "Mayo", "Mushrooms", "Onion", "Pickles", "Tomato", "Grilled Onions", "Spicy Mayo"]
 
 menu = {
     "Burgers" : {
@@ -176,7 +176,9 @@ menu = {
             "Six All-American Angus patties topped with cheddar, grilled onions and a mountain of bacon!!! So good that you won't \
                 even regret saying goodbye to your family!"),
         "The Classic": Burger("The classic ", 12.00, buns[0], patties[1], cheeses[1],[ toppings[3], toppings[6], toppings[8], toppings[4], toppings[2] ],\
-                              "Made with 100% pure beef topped with lettuce, onions, tomatoes and cheddar.")
+                              "Made with 100% pure beef topped with lettuce, onions, tomatoes and cheddar."),
+        "The PG": Burger("The PG", 13.00, buns[0], patties[4], cheeses[3],[ toppings[3], toppings[6], toppings[8], toppings[10], toppings[2] ], \
+                              "Spicy chicken sandwich with lettuce, tomatoes, onion, and three strips crispy bacon and homemmade spicy mayo.")
     },
 
     "Sides" : { 
