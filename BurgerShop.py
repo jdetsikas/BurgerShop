@@ -198,13 +198,7 @@ menu = {
 
     },
 
-<<<<<<< HEAD
    
-=======
-    Beer = ["Corona","Blue Moon", "Stella"],
-    Lemonade = ["Pink", "Original", "Peach"],
-    Smoothie = ["Strawberry Banana", "Mango", "Peanut Butter Banana"],
->>>>>>> 8df77c39cbec4d2742da938bf97400a4ff512d1d
 
     "Drinks" : {
         "Soft Drink":Drink("medium","Soft Drink", 1.00),
