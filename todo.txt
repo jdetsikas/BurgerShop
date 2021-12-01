@@ -10,15 +10,10 @@ sides - french fries..etc.. 6
 takeorder function
 	{while loop,print}
 
-combo class 
-structure of order class
 user input side function 
 user input combo function
 
-
-
 scope of options avaialbe(custom)
-
 
 #notes
 
