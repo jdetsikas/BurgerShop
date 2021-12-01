@@ -2,6 +2,8 @@
 # Classes and Variables #
 ########################
 
+orders = []
+
 class FoodItem:
     name = ''
     price = ''
@@ -30,8 +32,7 @@ class Burger(FoodItem):
         self.bun = bun
         self.patty = patty
         self.cheese = cheese
-        for item in topp:
-            self.toppings.append(item)
+        self.toppings = topp
         self.description = desc
 
 class Drink(FoodItem):
@@ -67,8 +68,9 @@ class Order:
     items = []
     total = 0
 
-    def __init__(self, item):
-        self.items.append(item)
+    def __init__(self):
+        orders.append(self)
+        self.num = len(orders)
     def add_item(self, item):
         self.items.append(item)
     def calc_total(self):
@@ -83,12 +85,17 @@ class Order:
 
 def user_input_burger():
     # ask user for input and store it in burger object
-    name = "Build your own"
-    price = 12.99
-    bun = input("What type of bun would you like? ")
-    patty = input("What type of patty would you like? ")
-    temp = input("What temp would you like it to be cooked? ")
-    b = Burger(name, price, bun, patty, temp)
+    counter = 1
+    for i in menu[1].keys():
+        print (i.get_name(), i.description, "(", counter, ")")
+    selected_burger = input("What is your choice? ")    
+    if selected_burger == 0:     
+        name = "Build your own"
+        price = 12.99
+        bun = input("What type of bun would you like? ")
+        patty = input("What type of patty would you like? ")
+        topp = input("What temp would you like it to be cooked? ")
+        b = Burger(name, price, bun, patty, temp)
 
     return b
 
@@ -122,27 +129,56 @@ def take_order():
     # repeat taking order until client is done
     # display order details
     # display a thank you message
-    print("Welcome to Burger Shop")
+    print("Welcome to Burger Shop\n\n")
+    more = True
+    count = 0
+    while more != False:
+        if count == 0:
+            print("What can I get you started with? ")
+        else:
+            print("Select an item or enter 0 to quit\n")
+            selected_item = input("A Burger(1), Drink(2), Side(3), or make a Combo(4) ")
+            if selected_item == 0:
+                more = False
+            else:
+                if selected_item == 1:
+                    user_input_burger()
+                elif selected_item == 2:
+                    user_input_drink
+                elif selected_item == 3:
+                    user_input_side()
+                elif selected_item == 4:
+                    user_input_combo()
+                else:
+                    print("Please enter a valid option")
+            count = count + 1
+    print("\n Thanks for placing your order with us! ")
 
 
 ###############
 # Menu Items #
 #############
 
+buns = ["Brioche", "Ciabatta", "Plain"]
+patties = ["Angus", "Beef", "Sirloin", "Veggie", "Chicken Filet"]
+cheeses = ["American", "Cheddar", "Gouda", "Pepperjack"]
+toppings = ["Arugula", "Avocado", "Bacon", "Lettuce", "Mayo", "Mushrooms", "Onion", "Pickles", "Tomato", "Grilled Onions", "Spicy Mayo"]
+
 menu = {
     "Burgers" : {
-        "The AJ" : Burger("The AJ", 14.00, "Ciabatta", "Veggie Patty", "Gouda", ["avocado", "onion", "arugula", "mushrooms"], \
+        "The AJ": Burger("The AJ", 14.00, buns[1], patties[3], cheeses[2], [ toppings[1], toppings[6], toppings[0], toppings[5] ], \
             "Beautifully crafted sandwich on a ciabatta roll with a veggie patty, gouda, avocado, onion, arugula, and mushroom"),
       
-        "The Big Al" : Burger("The Big Al", 17.00, "plain", "Sirloin", "American Cheese", ["lettuce", "tomato", "mayo", "pickles"], \
+        "The Big Al" : Burger("The Big Al", 17.00, buns[2], patties[2], cheeses[0], [ toppings[3], toppings[8], toppings[4], toppings[7] ], \
             "Our most popular burger option!! Filled with a thick soft juicy patty. Comes with lettuce,tomato,mayo,and pickles"),
       
-        "The Triple Bypass" : Burger("The Triple Bypass", 22.00, "Brioche", "Angus Patty", "Cheddar", ["grilled onions", "bacon"], \
+        "The Triple Bypass" : Burger("The Triple Bypass", 22.00, buns[0], patties[0], cheeses[1], [ toppings[9], toppings[2] ], \
             "Six All-American Angus patties topped with cheddar, grilled onions and a mountain of bacon!!! So good that you won't \
                 even regret saying goodbye to your family!"),
-        
-        "The Classic": Burger("The classic ", 12.00, "Brioche", "beef Patty", "Cheddar",["lettuce", "onions","tomatoes" ,"mayo", "bacon"],\
-                              "Made with 100% pure beef topped with lettuce, onions, tomatoes and cheddar.")
+        "The Classic": Burger("The classic ", 12.00, buns[0], patties[1], cheeses[1],[ toppings[3], toppings[6], toppings[8], toppings[4], toppings[2] ],\
+                              "Made with 100% pure beef topped with lettuce, onions, tomatoes and cheddar."),
+        "The PG": Burger("The PG", 13.00, buns[0], patties[4], cheeses[3],[ toppings[3], toppings[6], toppings[8], toppings[10], toppings[2] ], \
+                              "Spicy chicken sandwich with lettuce, tomatoes, onion, and three strips crispy bacon and homemmade spicy mayo.")
     },
 
     "Sides" : { 
@@ -173,3 +209,12 @@ menu = {
 
 
 take_order()
+
+##########
+# Tests #
+########
+
+ord = Order()
+ord.add_item(menu["Burgers"]["The Classic"])
+for i in ord.items[0].toppings:
+    print(i)
