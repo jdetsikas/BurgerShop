@@ -32,8 +32,12 @@ class Burger(FoodItem):
         self.bun = bun
         self.patty = patty
         self.cheese = cheese
-        self.toppings = topp
+        for item in topp:
+            self.toppings = topp
         self.description = desc
+        
+    def add_topping(self, topp):
+        self.toppings.append(topp)
 
 class Drink(FoodItem):
     size = ''
@@ -194,7 +198,13 @@ menu = {
 
     },
 
+<<<<<<< HEAD
    
+=======
+    Beer = ["Corona","Blue Moon", "Stella"],
+    Lemonade = ["Pink", "Original", "Peach"],
+    Smoothie = ["Strawberry Banana", "Mango", "Peanut Butter Banana"],
+>>>>>>> 8df77c39cbec4d2742da938bf97400a4ff512d1d
 
     "Drinks" : {
         "Soft Drink":Drink("medium","Soft Drink", 1.00),
