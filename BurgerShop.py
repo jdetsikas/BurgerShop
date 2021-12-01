@@ -153,6 +153,8 @@ menu = {
     },
 
     "Drinks" : {
+        "Soft Drink":Drink("medium","Coke", 1.00),
+        "Smoothie": Drink("medium","strawberry bananna", 2.00),
 
     }
 }
