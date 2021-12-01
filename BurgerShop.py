@@ -83,12 +83,17 @@ class Order:
 
 def user_input_burger():
     # ask user for input and store it in burger object
-    name = "Build your own"
-    price = 12.99
-    bun = input("What type of bun would you like? ")
-    patty = input("What type of patty would you like? ")
-    temp = input("What temp would you like it to be cooked? ")
-    b = Burger(name, price, bun, patty, temp)
+    counter = 1
+    for i in menu[1].keys():
+        print (i.get_name(), i.description, "(", counter, ")")
+    selected_burger = input("What is your choice? ")    
+    if selected_burger == 0:     
+        name = "Build your own"
+        price = 12.99
+        bun = input("What type of bun would you like? ")
+        patty = input("What type of patty would you like? ")
+        topp = input("What temp would you like it to be cooked? ")
+        b = Burger(name, price, bun, patty, temp)
 
     return b
 
@@ -121,7 +126,30 @@ def take_order():
     # repeat taking order until client is done
     # display order details
     # display a thank you message
-    print("Welcome to Burger Shop")
+    print("Welcome to Burger Shop\n\n")
+    more = True
+    count = 0
+    while more != False:
+        if count == 0:
+            print("What can I get you started with? ")
+        else:
+            print("Select an item or enter 0 to quit\n")
+            selected_item = input("A Burger(1), Drink(2), Side(3), or make a Combo(4) ")
+            if selected_item == 0:
+                more = False
+            else:
+                if selected_item == 1:
+                    user_input_burger()
+                elif selected_item == 2:
+                    user_input_drink
+                elif selected_item == 3:
+                    user_input_side()
+                elif selected_item == 4:
+                    user_input_combo()
+                else:
+                    print("Please enter a valid option")
+            count = count + 1
+    print("\n Thanks for placing your order with us! ")
 
 
 ###############
@@ -133,7 +161,7 @@ menu = {
         "The AJ" : Burger("The AJ", 14.00, "Ciabatta", "Veggie Patty", "Gouda", ["avocado", "onion", "arugula", "mushrooms"], \
             "Beautifully crafted sandwich on a ciabatta roll with a veggie patty, gouda, avocado, onion, arugula, and mushroom"),
       
-        "The Big Al : Burger("The Big Al", 17.00, "plain", "Sirloin", "American Cheese", ["lettuce", "tomato", "mayo", "pickles"], \
+        "The Big Al" : Burger("The Big Al", 17.00, "plain", "Sirloin", "American Cheese", ["lettuce", "tomato", "mayo", "pickles"], \
             "Our most popular burger option!! Filled with a thick soft juicy patty. Comes with lettuce,tomato,mayo,and pickles"),
       
         "The Triple Bypass" : Burger("The Triple Bypass", 22.00, "Brioche", "Angus Patty", "Cheddar", ["grilled onions", "bacon"], \
