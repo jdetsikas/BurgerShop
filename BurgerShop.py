@@ -142,6 +142,8 @@ menu = {
                 even regret saying goodbye to your family!"),
         "The Classic": Burger("The classic ", 12.00, "Brioche", "beef Patty", "Cheddar",["lettuce", "onions","tomatoes" ,"mayo", "bacon"],\
                               "Made with 100% pure beef topped with lettuce, onions, tomatoes and cheddar.")
+        "The PG": Burger("The PG", 13.00, "Brioche", "Chicken Filet", "Pepperjack, [lettuce, onions, tomatoes, spicy mayo, bacon"), \
+                              "Spicy chicken sandwich with lettuce, tomatoes, onion, and three strips crispy bacon and homemmade spicy mayo."
     },
 
     "Sides" : { 
