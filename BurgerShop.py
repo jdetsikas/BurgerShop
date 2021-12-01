@@ -195,9 +195,30 @@ menu = {
 
     },
 
-    "Drinks" : {
+    Beer = ["Corona","Blue Moon", "Stella"],
+    Lemonade = ["Pink", "Original", "Peach"],
+    Smoothie = ["Strawberry Banana", "Mango", "Peanut Butter Banana"],
+
+    "Drinks" = {
         "Soft Drink":Drink("medium","Soft Drink", 1.00),
-        "Smoothie": Drink("medium","strawberry bananna", 2.00),
+        "Smoothie": Drink("medium","flavor", 2.00),
+        "Lemonade": Drink("medium","type",2.00),
+        "Beer": Drink("medium","company",6.00)
 
     }
 }
+
+
+
+
+
+take_order()
+
+##########
+# Tests #
+########
+
+ord = Order()
+ord.add_item(menu["Burgers"]["The Classic"])
+for i in ord.items[0].toppings:
+    print(i)
