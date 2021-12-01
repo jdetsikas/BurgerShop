@@ -38,6 +38,16 @@ class Burger(FoodItem):
         
     def add_topping(self, topp):
         self.toppings.append(topp)
+        
+    def set_bun(self, bun):
+        self.bun = bun
+        
+    def set_patty(self, patty):
+        self.patty = patty
+        
+    def set_bun(self, cheese):
+        self.cheese = cheese
+        
 
 class Drink(FoodItem):
     size = ''
@@ -92,17 +102,49 @@ def user_input_burger():
     counter = 1
     for i in menu[1].keys():
         print (i.get_name(), i.description, "(", counter, ")")
-    selected_burger = input("What is your choice? ")    
+    selected_burger = input("What is your choice? ")  
     if selected_burger == 0:     
         name = "Build your own"
-        price = 12.99
-        bun = input("What type of bun would you like? ")
-        patty = input("What type of patty would you like? ")
-        topp = input("What temp would you like it to be cooked? ")
-        b = Burger(name, price, bun, patty, temp)
+        price = 13.00
+        print_buns
+        bun = input("")
+        print_patty
+        patty = input("")
+        print_cheese
+        cheese = input("")
+        b = Burger(name, price, bun, patty, cheese, topp=[], desc="")
+        print_toppings()
+        while topp != 0:
+            topp = input("Enter topping or 0 ")
+            b.add_topping(topp)
+    else:
+        b = menu["Burgers"][selected_burger]
 
     return b
 
+def print_toppings():
+    print("Here are your toppings options\n")
+    for i in toppings:
+        print(i)
+    print("What topping would you like? Press 0 if done")
+    
+def print_buns():
+    print("Here are your bun options\n")
+    for i in buns:
+        print(i)
+    print("What bun would your like? Press 0 if none")
+    
+def print_patty():
+    print("Here are your patty options\n")
+    for i in patties:
+        print(i)
+    print("What patty would you like? Press 0 if none")
+
+def print_cheese():
+    print("Here are your cheese options\n")
+    for i in cheeses:
+        print(i)
+    print("What cheese would you like? Press 0 if none")
 
 def user_input_drink():
     # ask user for input and store it in drink object
@@ -170,6 +212,8 @@ toppings = ["Arugula", "Avocado", "Bacon", "Lettuce", "Mayo", "Mushrooms", "Onio
 
 menu = {
     "Burgers" : {
+        "Build your own": Burger("Build your own", 0, "", "", "", [], \
+            ""),
         "The AJ": Burger("The AJ", 14.00, buns[1], patties[3], cheeses[2], [ toppings[1], toppings[6], toppings[0], toppings[5] ], \
             "Beautifully crafted sandwich on a ciabatta roll with a veggie patty, gouda, avocado, onion, arugula, and mushroom"),
       
