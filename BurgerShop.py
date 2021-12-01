@@ -100,10 +100,11 @@ def user_input_burger():
 
 def user_input_drink():
     # ask user for input and store it in drink object
-    for drink in drink_dict:
-        print(drink)
-    drink_order = input("Which drink would you like? ")
-    d = Drink(drink_order, drink_dict[drink_order])
+    # deprecated, will fix
+    #for drink in drink_dict:
+    #    print(drink)
+    #drink_order = input("Which drink would you like? ")
+    #d = Drink(drink_order, drink_dict[drink_order])
 
     return d
 
@@ -166,14 +167,24 @@ menu = {
       
         "The Triple Bypass" : Burger("The Triple Bypass", 22.00, "Brioche", "Angus Patty", "Cheddar", ["grilled onions", "bacon"], \
             "Six All-American Angus patties topped with cheddar, grilled onions and a mountain of bacon!!! So good that you won't \
-                even regret saying goodbye to your family!")
+                even regret saying goodbye to your family!"),
+        "The Classic": Burger("The classic ", 12.00, "Brioche", "beef Patty", "Cheddar",["lettuce", "onions","tomatoes" ,"mayo", "bacon"],\
+                              "Made with 100% pure beef topped with lettuce, onions, tomatoes and cheddar.")
     },
 
-    "Sides" : {
+    "Sides" : { 
+        "French Fries": Side("hand cut fries", 4.99, "medium"),
+        "Classic salad" :Side("romane lettuce,olive oil,crushed garlic,Parmesan cheese,croutons",5.99,"medium"),
+        "Onion rings" :Side("onion dipped in bread crumbs and then deep fried",3.99,"medium"),
+        "Coleslaw" :Side("finely shredded raw cabbage with a salad dressing.",2.00,"small")
+        
+        
 
     },
 
     "Drinks" : {
+        "Soft Drink":Drink("medium","Soft Drink", 1.00),
+        "Smoothie": Drink("medium","strawberry bananna", 2.00),
 
     }
 }
