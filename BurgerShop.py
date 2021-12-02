@@ -238,13 +238,13 @@ def take_order():
             if selected_item == 0:
                 more = False
             else:
-                if selected_item == 1:
+                if selected_item == "Burger":
                     user_input_burger()
-                elif selected_item == 2:
+                elif selected_item == "Drink":
                     user_input_drink()
-                elif selected_item == 3:
+                elif selected_item == "Side":
                     user_input_side()
-                elif selected_item == 4:
+                elif selected_item == "Combo":
                     user_input_combo()
                 else:
                     print("Please enter a valid option")
@@ -266,8 +266,6 @@ smoothie = ["Strawberry Banana", "Mango", "Peanut Butter Banana"]
 
 menu = {
     "Burgers" : {
-        "Build your own": Burger("Build your own", 0, "", "", "", [], \
-            ""),
         "The AJ": Burger("The AJ", 14.00, buns[1], patties[3], cheeses[2], [ toppings[1], toppings[6], toppings[0], toppings[5] ], \
             "Beautifully crafted sandwich on a ciabatta roll with a veggie patty, gouda, avocado, onion, arugula, and mushroom"),
       
