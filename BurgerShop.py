@@ -147,14 +147,20 @@ def print_cheese():
     print("What cheese would you like? Press 0 if none")
 
 def user_input_drink():
-    # ask user for input and store it in drink object
-    # deprecated, will fix
-    #for drink in drink_dict:
-    #    print(drink)
-    #drink_order = input("Which drink would you like? ")
-    #d = Drink(drink_order, drink_dict[drink_order])
+    d = Drink()
+    for key,value in menu["Drinks"].items() :
+        print(key)
 
-    return d
+    choice = input("Select your  Drink: ")
+    if choice in menu["Drinks"]:
+        d = menu["Drinks"][choice]
+        return d
+
+    else:
+        print("invalid drink name")
+    # ask user for input and store it in drink object
+    
+       
 
 
 def user_input_side():
@@ -190,7 +196,7 @@ def take_order():
                 if selected_item == 1:
                     user_input_burger()
                 elif selected_item == 2:
-                    user_input_drink
+                    user_input_drink()
                 elif selected_item == 3:
                     user_input_side()
                 elif selected_item == 4:
