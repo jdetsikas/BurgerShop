@@ -112,7 +112,10 @@ def user_input_burger():
                 addTopp = False
             else:
                 topp = choice
-                b.add_topping(topp)
+                if topp in toppings:
+                    b.add_topping(topp)
+                else:
+                    print("Please enter a valid topping \n")
     else:
         b = menu["Burgers"][selected_burger]
 
