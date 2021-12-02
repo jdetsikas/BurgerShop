@@ -75,6 +75,11 @@ class Combo(FoodItem):
         self.entree = ent
         self.side = side
         self.drink = drink
+        
+    def display(self):
+       print("\t --> the", self.name,"is our celeb and tasty "+ 
+             self.entree,"served with a " + self.side,"and an unlimited choice of",
+             self.drink,"for a price of:",str(self.price)+'$. \n')
 
 
 class Order:
@@ -153,8 +158,8 @@ def user_input_drink():
     #    print(drink)
     #drink_order = input("Which drink would you like? ")
     #d = Drink(drink_order, drink_dict[drink_order])
-
-    return d
+    #return d
+    pass
 
 
 def user_input_side():
@@ -163,18 +168,36 @@ def user_input_side():
     return s
 
 
-def user_input_combo():
-    c = Combo()
+def user_input_combo(menuCombo):   
+    c = menuCombo
+    #display menu
+    for i in c.keys():
+        c.get(i).display()
+    comboPick = str(input('Please tap 1 for combo #1, 2 for combo #2, 3 for combo #3, '))
+    return (combo_menu.get(comboPick).price) # can return a tuple
+    # ask user for input and store it in combo object
     # ask user for input and store it in combo object
     # a combo must include one burger, one side, and one drink
     return c
-
+def pickItem(choice):
+    
+    Pick_item = {
+                "0": False,
+                "1": user_input_burger(),
+                "2": user_input_side(),
+                "3": user_input_side(),
+                "4": user_input_combo()
+                }  
+    return Pick_item.get(choice,"please choose between 1 or 2 or 3")
 
 def take_order():
     # ask user for name for the order
     # repeat taking order until client is done
     # display order details
     # display a thank you message
+    
+   
+    
     print("Welcome to Burger Shop\n\n")
     more = True
     count = 0
@@ -184,6 +207,11 @@ def take_order():
         else:
             print("Select an item or enter 0 to quit\n")
             selected_item = input("A Burger(1), Drink(2), Side(3), or make a Combo(4) ")
+            # try:
+            #     pickItem(selected_item)
+            #  except (KeyError,ValueError, TypeError, NameError) as error:
+            #      print(f"Unexpected {error = }")
+            
             if selected_item == 0:
                 more = False
             else:
@@ -261,10 +289,15 @@ menu = {
 }
 
 
-
+combo_menu = {
+                "1": Combo("combo1", 12, list(menu['Burgers'])[0],list(menu['Sides'])[0],list(menu['Drinks'])[0]),
+                "2": Combo("combo2", 12, list(menu['Burgers'])[1],list(menu['Sides'])[0],list(menu['Drinks'])[0]),
+                "3": Combo("combo3", 12, list(menu['Burgers'])[2],list(menu['Sides'])[0],list(menu['Drinks'])[0])
+             }
 
 
 take_order()
+
 
 ##########
 # Tests #
