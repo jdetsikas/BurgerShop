@@ -49,6 +49,9 @@ class Burger(FoodItem):
         self.cheese = cheese
         
 
+    def add_topping(self, topp):
+        self.toppings.append(topp)
+
 class Drink(FoodItem):
     size = ''
 
@@ -81,7 +84,6 @@ class Combo(FoodItem):
              self.entree,"served with a " + self.side,"and an unlimited choice of",
              self.drink,"for a price of:",str(self.price)+'$. \n')
 
-
 class Order:
     num = None
     items = []
@@ -105,51 +107,69 @@ class Order:
 def user_input_burger():
     # ask user for input and store it in burger object
     counter = 1
-    for i in menu[1].keys():
-        print (i.get_name(), i.description, "(", counter, ")")
+
+    print(" 0. Build Your Own")
+    for i in menu["Burgers"].keys():
+        b = menu["Burgers"][i]
+        print (f" {counter}.", b.get_name(), "-", b.description)
+        counter += 1
+
     selected_burger = input("What is your choice? ")  
-    if selected_burger == 0:     
-        name = "Build your own"
-        price = 13.00
-        print_buns
-        bun = input("")
-        print_patty
-        patty = input("")
-        print_cheese
-        cheese = input("")
-        b = Burger(name, price, bun, patty, cheese, topp=[], desc="")
-        print_toppings()
-        while topp != 0:
-            topp = input("Enter topping or 0 ")
-            b.add_topping(topp)
+
+    if selected_burger == "Build Your Own":     
+        b = user_create_burger()
+        addTopp = True
+
+        print("\nOptions:")
+        print(" 0. None")
+        for idx, top in enumerate(toppings):
+            print(f" {idx + 1}. {top}")
+
+        while addTopp != False:
+            choice = input("Enter topping: ")
+            if choice == "None":
+                addTopp = False
+            else:
+                topp = choice
+                if topp in toppings:
+                    b.add_topping(topp)
+                else:
+                    print("Please enter a valid topping \n")
     else:
         b = menu["Burgers"][selected_burger]
 
+    print(b.name, b.price, b.description, b.toppings)
     return b
 
-def print_toppings():
-    print("Here are your toppings options\n")
-    for i in toppings:
-        print(i)
-    print("What topping would you like? Press 0 if done")
-    
-def print_buns():
-    print("Here are your bun options\n")
-    for i in buns:
-        print(i)
-    print("What bun would your like? Press 0 if none")
-    
-def print_patty():
-    print("Here are your patty options\n")
-    for i in patties:
-        print(i)
-    print("What patty would you like? Press 0 if none")
+def user_create_burger():
+    name = "Build Your Own"
+    price = 13
+    desc = "Built-to-order burger"
 
-def print_cheese():
-    print("Here are your cheese options\n")
-    for i in cheeses:
-        print(i)
-    print("What cheese would you like? Press 0 if none")
+    def custom_selection(type, list):
+        print("\nOptions:")
+        print(" 0. None")
+
+        for idx, val in enumerate(list):
+            print(f" {idx + 1}. {val}")
+        
+        userInput = input(f"Please select a {type}: ")
+        choice = ""
+
+        if userInput == "None":
+            choice = "None"
+        else:
+            choice = userInput
+
+        print("Selected", choice)
+        return choice
+    
+    bun = custom_selection("bun", buns)
+    patty = custom_selection("patty", patties)
+    cheese =custom_selection("cheese", cheeses)
+    topp = []
+
+    return Burger(name, price, bun, patty, cheese, topp, desc)
 
 def user_input_drink():
     d = Drink()
@@ -160,12 +180,9 @@ def user_input_drink():
     if choice in menu["Drinks"]:
         d = menu["Drinks"][choice]
         return d
-
     else:
         print("invalid drink name")
     # ask user for input and store it in drink object
-    
-       
 
 
 def user_input_side():
@@ -231,7 +248,7 @@ def take_order():
                     user_input_combo()
                 else:
                     print("Please enter a valid option")
-            count = count + 1
+        count = count + 1
     print("\n Thanks for placing your order with us! ")
 
 
@@ -304,12 +321,7 @@ combo_menu = {
 
 take_order()
 
-
 ##########
 # Tests #
 ########
 
-ord = Order()
-ord.add_item(menu["Burgers"]["The Classic"])
-for i in ord.items[0].toppings:
-    print(i)
