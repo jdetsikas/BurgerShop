@@ -194,8 +194,8 @@ def user_input_side():
     return s
 
 
-def user_input_combo(menuCombo):   
-    c = menuCombo
+def user_input_combo():   
+    c = combo_menu
     #display menu
     for i in c.keys():
         c.get(i).display()
@@ -212,7 +212,7 @@ def pickItem(choice):
                 "1": user_input_burger(),
                 "2": user_input_side(),
                 "3": user_input_side(),
-                "4": user_input_combo()
+                "4": user_input_combo(combo_menu)
                 }  
     return Pick_item.get(choice,"please choose between 1 or 2 or 3")
 
@@ -233,10 +233,10 @@ def take_order():
         else:
             print("Select an item or enter 0 to quit\n")
             selected_item = input("A Burger(1), Drink(2), Side(3), or make a Combo(4) ")
-            try:
-                pickItem(selected_item)
-            except (KeyError,ValueError, TypeError, NameError) as error:
-                 print(f"Unexpected {error}")
+            # try:
+            #      pickItem(selected_item)
+            # except (KeyError,ValueError, TypeError, NameError) as error:
+            #       print(f"Unexpected {error = }")
             
             if selected_item == 0:
                 more = False
