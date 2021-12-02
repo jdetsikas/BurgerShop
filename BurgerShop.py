@@ -122,6 +122,26 @@ class Combo(FoodItem):
         for it in self.items:
             self.total += it.get_price()
         return self.total
+    def display(self):
+        print("\
+            ----------------------------------\n\
+            ----------- Your Order -----------\n\
+            ----------------------------------\n\n\
+            Item:                   Price:\n\
+            ")
+        for idx, obj in enumerate(self.items):
+            cost = float(obj.price)
+            format_price = "{:.2f}".format(cost)
+
+            print(f"\
+            {idx + 1}. {obj.name}\n\
+                                    ${format_price} \
+            ")
+        
+        print(f"\n\
+            ----------------------------------\n\
+            Total: ${self.calc_total()}\
+            ")
 
 
 ########################
@@ -232,6 +252,7 @@ def user_input_drink():
 
 
 def user_input_side():
+    #s = Side()
     # ask user for input and store it in side object
     for key,value in menu["Sides"].items() :
         print(key)
@@ -244,27 +265,27 @@ def user_input_side():
 
     else:
         print("invalid drink name")
-    return s
+    #return s
 
 
 def user_input_combo():   
     c = combo_menu
     #display menu
+    # ask user for input and store it in combo object
+    # ask user for input and store it in combo object
+    # a combo must include one burger, one side, and one drink
     for i in c.keys():
         c.get(i).display()
     comboPick = str(input('Please tap 1 for combo #1, 2 for combo #2, 3 for combo #3, '))
     return (combo_menu.get(comboPick).price) # can return a tuple
-    # ask user for input and store it in combo object
-    # ask user for input and store it in combo object
-    # a combo must include one burger, one side, and one drink
-    return c
+    
 def pickItem(choice):
     
     Pick_item = {
                 "0": False,
                 "1": user_input_burger(),
                 "2": user_input_side(),
-                "3": user_input_side(),
+                "3": user_input_drink(),
                 "4": user_input_combo(combo_menu)
                 }  
     return Pick_item.get(choice,"please choose between 1 or 2 or 3")
@@ -379,4 +400,3 @@ take_order()
 ##########
 # Tests #
 ########
-
