@@ -157,12 +157,14 @@ def user_input_drink():
         print(key)
 
     choice = input("Select your  Drink: ")
-    if choice in menu["Drinks"]:
-        d = menu["Drinks"][choice]
-        return d
-
-    else:
-        print("invalid drink name")
+    while True:
+        if choice in menu["Drinks"]:
+            d = menu["Drinks"][choice]
+            return d
+        else:
+             print("invalid drink name")
+             continue
+    
     # ask user for input and store it in drink object
     
        
