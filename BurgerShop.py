@@ -35,6 +35,9 @@ class Burger(FoodItem):
         self.toppings = topp
         self.description = desc
 
+    def add_topping(self, topp):
+        self.toppings.append(topp)
+
 class Drink(FoodItem):
     size = ''
 
@@ -62,7 +65,6 @@ class Combo(FoodItem):
         self.side = side
         self.drink = drink
 
-
 class Order:
     num = None
     items = []
@@ -86,22 +88,40 @@ class Order:
 def user_input_burger():
     # ask user for input and store it in burger object
     counter = 1
-    for i in menu[1].keys():
-        print (i.get_name(), i.description, "(", counter, ")")
-    selected_burger = input("What is your choice? ")    
-    if selected_burger == 0:     
-        name = "Build your own"
-        price = 12.99
-        bun = input("What type of bun would you like? ")
-        patty = input("What type of patty would you like? ")
-        topp = input("What temp would you like it to be cooked? ")
-        b = Burger(name, price, bun, patty)
 
+    print(" 0. Build Your Own")
+    for i in menu["Burgers"].keys():
+        b = menu["Burgers"][i]
+        print (f" {counter}.", b.get_name(), "-", b.description)
+        counter += 1
+
+    selected_burger = input("What is your choice? ")  
+
+    if selected_burger == "Build Your Own":     
+        b = user_create_burger()
+        addTopp = True
+
+        print("\nOptions:")
+        print(" 0. None")
+        for idx, top in enumerate(toppings):
+            print(f" {idx + 1}. {top}")
+
+        while addTopp != False:
+            choice = input("Enter topping: ")
+            if choice == "None":
+                addTopp = False
+            else:
+                topp = choice
+                b.add_topping(topp)
+    else:
+        b = menu["Burgers"][selected_burger]
+
+    print(b.name, b.price, b.description, b.toppings)
     return b
 
 def user_create_burger():
-    name = "Custom"
-    price = 8
+    name = "Build Your Own"
+    price = 13
     desc = "Built-to-order burger"
 
     def custom_selection(type, list):
@@ -114,10 +134,10 @@ def user_create_burger():
         userInput = input(f"Please select a {type}: ")
         choice = ""
 
-        if int(userInput) < 1:
+        if userInput == "None":
             choice = "None"
         else:
-            choice = list[int(userInput) - 1]
+            choice = userInput
 
         print("Selected", choice)
         return choice
@@ -125,7 +145,7 @@ def user_create_burger():
     bun = custom_selection("bun", buns)
     patty = custom_selection("patty", patties)
     cheese =custom_selection("cheese", cheeses)
-    topp = custom_selection("topping", toppings)
+    topp = []
 
     return Burger(name, price, bun, patty, cheese, topp, desc)
 
@@ -180,7 +200,7 @@ def take_order():
                     user_input_combo()
                 else:
                     print("Please enter a valid option")
-            count = count + 1
+        count = count + 1
     print("\n Thanks for placing your order with us! ")
 
 
@@ -232,13 +252,4 @@ menu = {
 # Tests #
 ########
 
-ord = Order()
-
-cust = user_create_burger()
-ord.add_item(cust)
-print(ord.items[0].name)
-print(ord.items[0].price)
-print(ord.items[0].bun)
-print(ord.items[0].patty)
-print(ord.items[0].cheese)
-print(ord.items[0].toppings)
+user_input_burger()
