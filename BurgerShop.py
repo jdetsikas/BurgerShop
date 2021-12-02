@@ -191,6 +191,17 @@ def user_input_drink():
 def user_input_side():
     s = Side()
     # ask user for input and store it in side object
+    for key,value in menu["Sides"].items() :
+        print(key)
+    choice = 1
+    while(choice != 0):
+        choice = input("Select your  Side or 0: ")
+        if choice in menu["Sides"]:
+            s = menu["Sides"][choice]
+        return s
+
+    else:
+        print("invalid drink name")
     return s
 
 
