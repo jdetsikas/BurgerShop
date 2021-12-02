@@ -6,7 +6,7 @@ orders = []
 
 class FoodItem:
     name = ''
-    price = ''
+    price = None
 
     def __init__(self, name, price):
         self.name = name
@@ -172,7 +172,7 @@ def user_create_burger():
     return Burger(name, price, bun, patty, cheese, topp, desc)
 
 def user_input_drink():
-    d = Drink()
+    # d = Drink()
     for key,value in menu["Drinks"].items() :
         print(key)
 
@@ -233,10 +233,10 @@ def take_order():
         else:
             print("Select an item or enter 0 to quit\n")
             selected_item = input("A Burger(1), Drink(2), Side(3), or make a Combo(4) ")
-            # try:
-            #     pickItem(selected_item)
-            #  except (KeyError,ValueError, TypeError, NameError) as error:
-            #      print(f"Unexpected {error = }")
+            try:
+                pickItem(selected_item)
+            except (KeyError,ValueError, TypeError, NameError) as error:
+                 print(f"Unexpected {error}")
             
             if selected_item == 0:
                 more = False
