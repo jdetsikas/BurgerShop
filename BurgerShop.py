@@ -1,3 +1,27 @@
+
+#    ___                     __ _                    ___    _                _ __  
+#   | _ )   _  _      _ _   / _` |   ___      _ _   / __|  | |_      ___    | '_ \ 
+#   | _ \  | +| |    | '_|  \__, |  / -_)    | '_|  \__ \  | ' \    / _ \   | .__/ 
+#   |___/   \_,_|   _|_|_   |___/   \___|   _|_|_   |___/  |_||_|   \___/   |_|__  
+# _|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""| 
+# "`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'
+                                                                             
+#         ▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒                                
+#       ░░▒▒░░▒▒░░▒▒░░░░░░░░                              
+#     ▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒                            
+#   ▒▒▒▒▒▒▒▒░░▒▒░░░░░░░░░░░░░░░░                          
+#   ▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒                          
+#   ▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒                          
+#     ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒                            
+#     ▓▓░░░░████░░░░░░░░░░░░░░                            
+#     ░░██▓▓▓▓▓▓▓▓████░░░░████                            
+#   ██▓▓░░░░░░░░░░░░░░░░░░░░██▓▓                          
+#   ████░░░░░░░░████████████████                          
+#   ▒▒▒▒██░░████████████████▒▒▒▒                          
+#   ▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒░░░░▒▒░░░░▒▒                          
+#     ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒     
+
+
 ##########################
 # Classes and Variables #
 ########################
@@ -108,8 +132,9 @@ class Combo(FoodItem):
              self.drink,"for a price of:",str(self.price)+'$. \n')
 
 
-#  Order Class
+
 #  Keeps track of all the items and the total price
+class Order(FoodItem):
     items = []
     total = 0
 
@@ -209,7 +234,7 @@ def user_create_burger():
         print("\nOptions:")
         print(" 0. None")
 
-        for idx, val in enumerate(list):
+        for idx, val in enumerate(list):  # Prints all options
             print(f" {idx + 1}. {val}")
         
         userInput = input(f"Please select a {type}: ")
@@ -223,6 +248,7 @@ def user_create_burger():
         print("Selected", choice)
         return choice
     
+    #  Sub function runs for all parameters
     bun = custom_selection("bun", buns)
     patty = custom_selection("patty", patties)
     cheese =custom_selection("cheese", cheeses)
@@ -230,8 +256,9 @@ def user_create_burger():
 
     return Burger(name, price, bun, patty, cheese, topp, desc) # A Burger with all selections
 
+#  Function that 
 def user_input_drink():
-    # d = Drink()
+    
     for key,value in menu["Drinks"].items() :
         print(key)
 
