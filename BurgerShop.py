@@ -98,6 +98,26 @@ class Order:
         for it in self.items:
             self.total += it.get_price()
         return self.total
+    def display(self):
+        print("\
+            ----------------------------------\n\
+            ----------- Your Order -----------\n\
+            ----------------------------------\n\n\
+            Item:                   Price:\n\
+            ")
+        for idx, obj in enumerate(self.items):
+            cost = float(obj.price)
+            format_price = "{:.2f}".format(cost)
+
+            print(f"\
+            {idx + 1}. {obj.name}\n\
+                                    ${format_price} \
+            ")
+        
+        print(f"\n\
+            ----------------------------------\n\
+            Total: ${self.calc_total()}\
+            ")
 
 
 #####################
@@ -336,4 +356,3 @@ take_order()
 ##########
 # Tests #
 ########
-
