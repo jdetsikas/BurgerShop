@@ -189,7 +189,7 @@ def user_input_drink():
 
 
 def user_input_side():
-    s = Side()
+    #s = Side()
     # ask user for input and store it in side object
     for key,value in menu["Sides"].items() :
         print(key)
