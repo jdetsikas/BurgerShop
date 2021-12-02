@@ -208,21 +208,21 @@ def user_input_side():
 def user_input_combo():   
     c = combo_menu
     #display menu
+    # ask user for input and store it in combo object
+    # ask user for input and store it in combo object
+    # a combo must include one burger, one side, and one drink
     for i in c.keys():
         c.get(i).display()
     comboPick = str(input('Please tap 1 for combo #1, 2 for combo #2, 3 for combo #3, '))
     return (combo_menu.get(comboPick).price) # can return a tuple
-    # ask user for input and store it in combo object
-    # ask user for input and store it in combo object
-    # a combo must include one burger, one side, and one drink
-    return c
+    
 def pickItem(choice):
     
     Pick_item = {
                 "0": False,
                 "1": user_input_burger(),
                 "2": user_input_side(),
-                "3": user_input_side(),
+                "3": user_input_drink(),
                 "4": user_input_combo(combo_menu)
                 }  
     return Pick_item.get(choice,"please choose between 1 or 2 or 3")
