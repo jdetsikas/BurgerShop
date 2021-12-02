@@ -4,6 +4,10 @@
 
 orders = []
 
+
+# FoodItem Class
+# Parent Class to all BurgerShop items
+# All FoodItems will have a name and price
 class FoodItem:
     name = ''
     price = None
@@ -11,6 +15,8 @@ class FoodItem:
     def __init__(self, name, price):
         self.name = name
         self.price = price
+        
+    ### Getters and setters
     def set_name(self, name):
         self.name = name
     def set_price(self, price):
@@ -20,6 +26,10 @@ class FoodItem:
     def get_price(self):
         return self.price
 
+
+# Burger Class
+# Child of FoodItem
+# Has additional Parameters of bun, patty, cheese, toppings, description
 class Burger(FoodItem):
     bun = ''
     patty = ''
@@ -36,9 +46,11 @@ class Burger(FoodItem):
             self.toppings = topp
         self.description = desc
         
+    ###  Adds toppings to list
     def add_topping(self, topp):
         self.toppings.append(topp)
-        
+    
+    ###  Getters and setters  
     def set_bun(self, bun):
         self.bun = bun
         
@@ -52,6 +64,10 @@ class Burger(FoodItem):
     def add_topping(self, topp):
         self.toppings.append(topp)
 
+
+# Drink Class
+# Child of FoodItem
+# Has an additional parameter size
 class Drink(FoodItem):
     size = ''
 
@@ -60,6 +76,9 @@ class Drink(FoodItem):
         self.size = size
 
 
+# Side Class
+# Child of FoodItem
+# Has an additional parameter size
 class Side(FoodItem):
     size = ''
 
@@ -68,6 +87,10 @@ class Side(FoodItem):
         self.size = size
 
 
+# Combo Class
+# Child of FoodItem
+# Has additional parameters ent, side, drink
+# Each additional parameter is an Object.  A Burger, Side, and Drink
 class Combo(FoodItem):
     entree = None
     side = None
@@ -84,8 +107,9 @@ class Combo(FoodItem):
              self.entree,"served with a " + self.side,"and an unlimited choice of",
              self.drink,"for a price of:",str(self.price)+'$. \n')
 
-class Order:
-    num = None
+
+#  Order Class
+#  Keeps track of all the items and the total price
     items = []
     total = 0
 
@@ -100,31 +124,37 @@ class Order:
         return self.total
 
 
-#####################
-# Helper Functions #
-###################
+########################
+### Helper Functions ###
+########################
 
+
+# Function to take user input and store it as a Burger Object
 def user_input_burger():
-    # ask user for input and store it in burger object
     counter = 1
 
     print(" 0. Build Your Own")
-    for i in menu["Burgers"].keys():
+    
+    for i in menu["Burgers"].keys(): # Loops through the menu Dictionary and prints all the options available
         b = menu["Burgers"][i]
         print (f" {counter}.", b.get_name(), "-", b.description)
         counter += 1
 
     selected_burger = input("What is your choice? ")  
-
-    if selected_burger == "Build Your Own":     
-        b = user_create_burger()
+    
+    if selected_burger == "Build Your Own":  #  If the user wants to build their own Burger, this runs through their options
+        
+        b = user_create_burger() #  Calls user_create_burger to handle everything but adding toppings
         addTopp = True
 
         print("\nOptions:")
         print(" 0. None")
-        for idx, top in enumerate(toppings):
+           
+        for idx, top in enumerate(toppings): # Runs through the topping options list and prints the options 
             print(f" {idx + 1}. {top}")
 
+        #  While the user still wants more toppings to their Burger
+        #  Loops through asking what else they want to add
         while addTopp != False:
             choice = input("Enter topping: ")
             if choice == "None":
@@ -135,17 +165,26 @@ def user_input_burger():
                     b.add_topping(topp)
                 else:
                     print("Please enter a valid topping \n")
+                    
+
+    #  If they select an option other than the build your own
+    #  It gets stored as a Burger Object
     else:
         b = menu["Burgers"][selected_burger]
 
+    
+    # Prints the users selection
     print(b.name, b.price, b.description, b.toppings)
     return b
 
+#  Function that will create a custom Burger Object with every thing toppings
 def user_create_burger():
     name = "Build Your Own"
     price = 13
     desc = "Built-to-order burger"
 
+
+    #  A sub function that is used to select all the choices from the dictionary 
     def custom_selection(type, list):
         print("\nOptions:")
         print(" 0. None")
@@ -169,27 +208,30 @@ def user_create_burger():
     cheese =custom_selection("cheese", cheeses)
     topp = []
 
-    return Burger(name, price, bun, patty, cheese, topp, desc)
+    return Burger(name, price, bun, patty, cheese, topp, desc) # A Burger with all selections
 
 def user_input_drink():
     # d = Drink()
     for key,value in menu["Drinks"].items() :
         print(key)
 
-    choice = input("Select your  Drink: ")
+    
     while True:
+        choice = input("Select your  Drink: ")
         if choice in menu["Drinks"]:
             d = menu["Drinks"][choice]
             return d
+            break
         else:
-             print("invalid drink name")
-             continue
+            print("invalid drink name")
+            choice = input("Select your  Drink: ")
+             
+             
     
     # ask user for input and store it in drink object
 
 
 def user_input_side():
-    s = Side()
     # ask user for input and store it in side object
     for key,value in menu["Sides"].items() :
         print(key)
@@ -241,13 +283,14 @@ def take_order():
     while more != False:
         if count == 0:
             print("What can I get you started with? ")
+            selected_item = input("A Burger(1), Drink(2), Side(3), or make a Combo(4) ")
         else:
             print("Select an item or enter 0 to quit\n")
-            selected_item = input("A Burger(1), Drink(2), Side(3), or make a Combo(4) ")
-            # try:
-            #      pickItem(selected_item)
-            # except (KeyError,ValueError, TypeError, NameError) as error:
-            #       print(f"Unexpected {error = }")
+            
+            try:
+                 pickItem(selected_item)
+            except (KeyError,ValueError, TypeError, NameError) as error:
+                  print(f"Unexpected {error}")
             
             if selected_item == 0:
                 more = False
