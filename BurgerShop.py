@@ -310,12 +310,12 @@ def pickItem(choice):
     
     Pick_item = {
                 "0": False,
-                "1": user_input_burger(),
-                "2": user_input_side(),
-                "3": user_input_drink(),
-                "4": user_input_combo(combo_menu)
+                "1": user_input_burger,
+                "2": user_input_side,
+                "3": user_input_drink,
+                "4": user_input_combo
                 }  
-    return Pick_item.get(choice,"please choose between 1 or 2 or 3")
+    return Pick_item.get(choice,"please choose between 1 or 2 or 3")()
 
 def take_order():
     # ask user for name for the order
