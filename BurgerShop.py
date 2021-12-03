@@ -21,13 +21,10 @@
 #   ▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒░░░░▒▒░░░░▒▒                          
 #     ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒     
 
-
-##########################
-# Classes and Variables #
-########################
-
-orders = []
-
+import BurgerMenu
+###########################
+## Classes and Variables ##
+###########################
 
 # FoodItem Class
 # Parent Class to all BurgerShop items
@@ -66,8 +63,7 @@ class Burger(FoodItem):
         self.bun = bun
         self.patty = patty
         self.cheese = cheese
-        for item in topp:
-            self.toppings = topp
+        self.toppings = topp
         self.description = desc
         
     ###  Adds toppings to list
@@ -134,25 +130,27 @@ class Combo(FoodItem):
 
 
 #  Keeps track of all the items and the total price
-class Order(FoodItem):
+class Order():
     items = []
     total = 0
+    guestName = ""
 
-    def __init__(self):
-        orders.append(self)
-        self.num = len(orders)
     def add_item(self, item):
         self.items.append(item)
+
     def calc_total(self):
         for it in self.items:
             self.total += it.get_price()
-        return self.total
+        formatted_total = "{:.2f}".format(self.total)
+        return formatted_total
+
     def display(self):
-        print("\
-            ----------------------------------\n\
-            ----------- Your Order -----------\n\
-            ----------------------------------\n\n\
-            Item:                   Price:\n\
+        print(f"\
+            ------------------------------------------------------\n\
+            --------------------- Your Order ---------------------\n\
+            ------------------------------------------------------\n\n\
+            Customer Name: {self.guestName}\n\
+            Item(s):                                        Price:\n\
             ")
         for idx, obj in enumerate(self.items):
             cost = float(obj.price)
@@ -160,34 +158,32 @@ class Order(FoodItem):
 
             print(f"\
             {idx + 1}. {obj.name}\n\
-                                    ${format_price} \
+                                                            ${format_price} \
             ")
         
         print(f"\n\
-            ----------------------------------\n\
+            -------------------------------------------------------\n\
             Total: ${self.calc_total()}\
             ")
 
 
-########################
-### Helper Functions ###
-########################
+######################
+### Main Functions ###
+######################
 
 
 # Function to take user input and store it as a Burger Object
-def user_input_burger():
-    counter = 1
+def user_input_burger(ord):
+    counter = 0
 
-    print(" 0. Build Your Own")
-    
-    for i in menu["Burgers"].keys(): # Loops through the menu Dictionary and prints all the options available
-        b = menu["Burgers"][i]
-        print (f" {counter}.", b.get_name(), "-", b.description)
+    for key in menu["Burgers"].keys(): # Loops through the menu Dictionary and prints all the options available
         counter += 1
+        b = menu["Burgers"][key]
+        print (f" {counter}.", b.name, "-", b.description)
 
     selected_burger = input("What is your choice? ")  
     
-    if selected_burger == "Build Your Own":  #  If the user wants to build their own Burger, this runs through their options
+    if (selected_burger == "1") or (selected_burger.lower == "build your own"):  #  If the user wants to build their own Burger, this runs through their options
         
         b = user_create_burger() #  Calls user_create_burger to handle everything but adding toppings
         addTopp = True
@@ -220,10 +216,10 @@ def user_input_burger():
     
     # Prints the users selection
     print(b.name, b.price, b.description, b.toppings)
-    return b
+    ord.add_item(b)
 
 #  Function that will create a custom Burger Object with every thing toppings
-def user_create_burger():
+def user_create_burger(ord):
     name = "Build Your Own"
     price = 13
     desc = "Built-to-order burger"
@@ -251,126 +247,133 @@ def user_create_burger():
     #  Sub function runs for all parameters
     bun = custom_selection("bun", buns)
     patty = custom_selection("patty", patties)
-    cheese =custom_selection("cheese", cheeses)
+    cheese = custom_selection("cheese", cheeses)
     topp = []
 
-    return Burger(name, price, bun, patty, cheese, topp, desc) # A Burger with all selections
+    return Burger(name, price, bun, patty, cheese, topp, desc)
 
-#  Function that 
-def user_input_drink():
+def user_input_item(dict, ord):
+    list = getList(dict)
+    counter = 0
+
+    print("\nOptions:\n")
+    for key in dict.keys():
+        counter += 1
+        print(f" {counter}. {key}")
     
-    for key,value in menu["Drinks"].items() :
-        print(key)
+    choice = input("\nPlease input your desired item name or number: ")
 
-    
-    while True:
-        choice = input("Select your  Drink: ")
-        if choice in menu["Drinks"]:
-            d = menu["Drinks"][choice]
-            return d
-            break
-        else:
-            print("invalid drink name")
-            choice = input("Select your  Drink: ")
-             
-             
-    
-    # ask user for input and store it in drink object
+    while check_input(choice, len(list), list) == False:
+        choice = input("Please input a valid option: ")
 
-
-def user_input_side():
-    #s = Side()
-    # ask user for input and store it in side object
-    for key,value in menu["Sides"].items() :
-        print(key)
-    choice = 1
-    while(choice != 0):
-        choice = input("Select your  Side or 0: ")
-        if choice in menu["Sides"]:
-            s = menu["Sides"][choice]
-        return s
-
-    else:
-        print("invalid drink name")
-    #return s
-
-
-def user_input_combo():   
-    c = combo_menu
-    #display menu
-    # ask user for input and store it in combo object
-    # ask user for input and store it in combo object
-    # a combo must include one burger, one side, and one drink
-    for i in c.keys():
-        c.get(i).display()
-    comboPick = str(input('Please tap 1 for combo #1, 2 for combo #2, 3 for combo #3, '))
-    return (combo_menu.get(comboPick).price) # can return a tuple
-    
-def pickItem(choice):
-    
-    Pick_item = {
-                "0": False,
-                "1": user_input_burger(),
-                "2": user_input_side(),
-                "3": user_input_drink(),
-                "4": user_input_combo(combo_menu)
-                }  
-    return Pick_item.get(choice,"please choose between 1 or 2 or 3")
+    try:
+        print("You Selected:", list[int(choice) - 1])
+        numSelect = list[int(choice) -1]
+        item = dict[numSelect]
+        ord.add_item(item)
+    except:
+        strSelect = choice.lower().title()
+        print(f"You Selected: {strSelect}")
+        item = dict[strSelect]
+        ord.add_item(item)
 
 def take_order():
-    # ask user for name for the order
-    # repeat taking order until client is done
-    # display order details
-    # display a thank you message
-    
-   
-    
-    print("Welcome to Burger Shop\n\n")
     more = True
     count = 0
+    newOrd= Order()
+
+    print("Welcome to Burger Shop!\n")
+    name = input("Please enter a name for your order: ")
+    newOrd.guestName = name.lower().title()
+
     while more != False:
         if count == 0:
-            print("What can I get you started with? ")
-            selected_item = input("A Burger(1), Drink(2), Side(3), or make a Combo(4) ")
+            print(f"\nWhat can I get you started with, {newOrd.guestName}? ")
+            print("\nOptions:\n")
+            print(" 1. Burgers\n 2. Drinks\n 3. Sides\n 4. Combos")
+            selected_item = input("\nInput Option Number or Name: ")
+
+            while check_input(selected_item, 4, ["burgers", "drinks", "sides", "combos"]) == False:
+                selected_item = input("Please input a valid option: ")
+            
+            pickItem(selected_item, newOrd)
+            count = count + 1
         else:
-            print("Select an item or enter 0 to quit\n")
-            
-            try:
-                 pickItem(selected_item)
-            except (KeyError,ValueError, TypeError, NameError) as error:
-                  print(f"Unexpected {error}")
-            
-            if selected_item == 0:
+            print("\nWould you like to add another item?")
+            print("\nOptions:\n")
+            print(" 1. Burgers\n 2. Drinks\n 3. Sides\n 4. Combos\n 5. Finish Order\n")
+            selection = input("Selection: ")
+
+            while check_input(selection, 5, ["burgers", "drinks", "sides", "combos", "finish order"]) == False:
+                selection = input("Please input a valid option: ")
+
+            if pickItem(selection, newOrd) == "Done":
                 more = False
             else:
-                if selected_item == "Burger":
-                    user_input_burger()
-                elif selected_item == "Drink":
-                    user_input_drink()
-                elif selected_item == "Side":
-                    user_input_side()
-                elif selected_item == "Combo":
-                    user_input_combo()
-                else:
-                    print("Please enter a valid option")
-        count = count + 1
-    print("\n Thanks for placing your order with us! ")
+                more = True
 
+    newOrd.display()
 
-###############
-# Menu Items #
-#############
+########################
+### Helper Functions ###
+########################
+
+def check_input(inp, range, list):
+    lowList = []
+    for item in list:
+        lowList.append(item.lower())
+    
+    # Checks if the input is in the list without case sensitivity
+    if inp.lower() in lowList:
+        return True
+    # If not, checks if the input is a valid number
+    else:
+        try:
+            if int(inp) > range:
+                return False
+            elif int(inp) < 1:
+                return False
+        except:
+            return False
+    # If there have been no errors, the input must be valid
+    return True
+    
+def pickItem(choice, ord):
+    if choice == 0:
+        return print("Please select a valid option")
+    elif ( ( choice == "1" ) or ( choice.lower() == "burgers" ) ): 
+        user_input_burger(ord)
+    elif ( ( choice == "2" ) or ( choice.lower() == "drinks" ) ): 
+        user_input_item(menu["Drinks"], ord)
+    elif ( ( choice == "3" ) or ( choice.lower() == "sides" ) ): 
+        user_input_item(menu["Sides"], ord)
+    elif ( ( choice == "4" ) or ( choice.lower() == "combos" ) ): 
+        user_input_item(combo_menu, ord)
+    elif ( ( choice == "5" ) or ( choice.lower() == "finish order" ) ): 
+        return "Done"
+    return False
+
+def getList(dict):
+    list = []
+    for key in dict:
+        list.append(key)
+    return list
+
+##################
+### Menu Items ###
+##################
 
 buns = ["Brioche", "Ciabatta", "Plain"]
 patties = ["Angus", "Beef", "Sirloin", "Veggie", "Chicken Filet"]
 cheeses = ["American", "Cheddar", "Gouda", "Pepperjack"]
 toppings = ["Arugula", "Avocado", "Bacon", "Lettuce", "Mayo", "Mushrooms", "Onion", "Pickles", "Tomato", "Grilled Onions", "Spicy Mayo"]
 beer = ["Corona","Blue Moon", "Stella"]
-lemonade = ["Pink", "Original", "Peach"]
-smoothie = ["Strawberry Banana", "Mango", "Peanut Butter Banana"]
+lemonade = ["Pink Lemonade", "Original Lemonade", "Peach Lemonade"]
+smoothie = ["Strawberry Banana Smoothie", "Mango Smoothie", "Peanut Butter Banana Smoothie"]
 
 menu = {
     "Burgers" : {
+        "Build Your Own": Burger("Build Your Own", 12, "None", "None", "None", [], "Built-to-order burger"),
         "The AJ": Burger("The AJ", 14.00, buns[1], patties[3], cheeses[2], [ toppings[1], toppings[6], toppings[0], toppings[5] ], \
             "Beautifully crafted sandwich on a ciabatta roll with a veggie patty, gouda, avocado, onion, arugula, and mushroom"),
       
@@ -378,26 +381,19 @@ menu = {
             "Our most popular burger option!! Filled with a thick soft juicy patty. Comes with lettuce,tomato,mayo,and pickles"),
       
         "The Triple Bypass" : Burger("The Triple Bypass", 22.00, buns[0], patties[0], cheeses[1], [ toppings[9], toppings[2] ], \
-            "Six All-American Angus patties topped with cheddar, grilled onions and a mountain of bacon!!! So good that you won't \
-                even regret saying goodbye to your family!"),
+            "Six All-American Angus patties topped with cheddar, grilled onions and a mountain of bacon!!! So good that you won't "\
+                "even regret saying goodbye to your family!"),
         "The Classic": Burger("The classic ", 12.00, buns[0], patties[1], cheeses[1],[ toppings[3], toppings[6], toppings[8], toppings[4], toppings[2] ],\
                               "Made with 100% pure beef topped with lettuce, onions, tomatoes and cheddar."),
         "The PG": Burger("The PG", 13.00, buns[0], patties[4], cheeses[3],[ toppings[3], toppings[6], toppings[8], toppings[10], toppings[2] ], \
                               "Spicy chicken sandwich with lettuce, tomatoes, onion, and three strips crispy bacon and homemmade spicy mayo.")
     },
-
     "Sides" : { 
-        "French Fries": Side("hand cut fries", 4.99, "medium"),
-        "Classic salad" :Side("romane lettuce,olive oil,crushed garlic,Parmesan cheese,croutons",5.99,"medium"),
-        "Onion rings" :Side("onion dipped in bread crumbs and then deep fried",3.99,"medium"),
-        "Coleslaw" :Side("finely shredded raw cabbage with a salad dressing.",2.00,"small")
-        
-        
-
+        "French Fries": Side("French Fries", 4.99, "medium"),
+        "Classic Salad" :Side("Caeser Salad",5.99,"medium"),
+        "Onion Rings" :Side("Onion Rings",3.99,"medium"),
+        "Coleslaw" :Side("Coleslaw",2.00,"small")
     },
-
-   
-
     "Drinks" : {
         "Soft Drink": Drink("medium","Soft Drink", 1.00),
         "Strawberry Banana Smoothie": Drink("medium",smoothie[0], 2.00),
@@ -409,20 +405,18 @@ menu = {
         "Corona": Drink("medium",beer[0],6.00), 
         "Blue Moon" :Drink("medium",beer[1],6.00),
         "Stella" :Drink("medium",beer[2],6.00),
-       
-
     }
 }
 
-
 combo_menu = {
-                "1": Combo("combo1", 12, list(menu['Burgers'])[0],list(menu['Sides'])[0],list(menu['Drinks'])[0]),
-                "2": Combo("combo2", 12, list(menu['Burgers'])[1],list(menu['Sides'])[0],list(menu['Drinks'])[0]),
-                "3": Combo("combo3", 12, list(menu['Burgers'])[2],list(menu['Sides'])[0],list(menu['Drinks'])[0])
-             }
-
+    "The AJ Combo": Combo("AJ Combo", 12, list(menu['Burgers'])[0],list(menu['Sides'])[0],list(menu['Drinks'])[0]),
+    "The Big Al Combo": Combo("Big Al Combo", 12, list(menu['Burgers'])[1],list(menu['Sides'])[0],list(menu['Drinks'])[0]),
+    "The Bypass Combo": Combo("Bypass Combo", 12, list(menu['Burgers'])[2],list(menu['Sides'])[0],list(menu['Drinks'])[0])
+}
 
 take_order()
+
+
 
 ##########
 # Tests #
