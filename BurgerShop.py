@@ -29,6 +29,7 @@
 # FoodItem Class
 # Parent Class to all BurgerShop items
 # All FoodItems will have a name and price
+import sys
 class FoodItem:
     name = ''
     price = None
@@ -183,7 +184,7 @@ def user_input_burger(ord):
 
     selected_burger = input("What is your choice? ")  
     
-    if (selected_burger == "1") or (selected_burger.lower == "build your own"):  #  If the user wants to build their own Burger, this runs through their options
+    if (selected_burger == "1") or (selected_burger.lower() == "build your own"):  #  If the user wants to build their own Burger, this runs through their options
         
         b = user_create_burger() #  Calls user_create_burger to handle everything but adding toppings
         addTopp = True
@@ -210,6 +211,9 @@ def user_input_burger(ord):
 
     #  If they select an option other than the build your own
     #  It gets stored as a Burger Object
+    # Press x to exit
+    elif selected_burger == "x":
+                    sys.exit()
     else:
         b = menu["Burgers"][selected_burger]
 
@@ -219,7 +223,7 @@ def user_input_burger(ord):
     ord.add_item(b)
 
 #  Function that will create a custom Burger Object with every thing toppings
-def user_create_burger(ord):
+def user_create_burger():
     name = "Build Your Own"
     price = 13
     desc = "Built-to-order burger"
@@ -288,7 +292,7 @@ def take_order():
 
     while more != False:
         if count == 0:
-            print(f"\nWhat can I get you started with, {newOrd.guestName}? ")
+            print(f"\nWhat can I get you started with, {newOrd.guestName}? (Enter x at any time to cancel your order) ")
             print("\nOptions:\n")
             print(" 1. Burgers\n 2. Drinks\n 3. Sides\n 4. Combos")
             selected_item = input("\nInput Option Number or Name: ")
@@ -326,6 +330,9 @@ def check_input(inp, range, list):
     # Checks if the input is in the list without case sensitivity
     if inp.lower() in lowList:
         return True
+    # Allows the user to enter x to exit
+    elif inp == "x":
+        sys.exit()
     # If not, checks if the input is a valid number
     else:
         try:
