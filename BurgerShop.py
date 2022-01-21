@@ -1,27 +1,3 @@
-
-#    ___                     __ _                    ___    _                _ __  
-#   | _ )   _  _      _ _   / _` |   ___      _ _   / __|  | |_      ___    | '_ \ 
-#   | _ \  | +| |    | '_|  \__, |  / -_)    | '_|  \__ \  | ' \    / _ \   | .__/ 
-#   |___/   \_,_|   _|_|_   |___/   \___|   _|_|_   |___/  |_||_|   \___/   |_|__  
-# _|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""| 
-# "`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'
-                                                                             
-#         ▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒                                
-#       ░░▒▒░░▒▒░░▒▒░░░░░░░░                              
-#     ▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒                            
-#   ▒▒▒▒▒▒▒▒░░▒▒░░░░░░░░░░░░░░░░                          
-#   ▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒                          
-#   ▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒                          
-#     ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒                            
-#     ▓▓░░░░████░░░░░░░░░░░░░░                            
-#     ░░██▓▓▓▓▓▓▓▓████░░░░████                            
-#   ██▓▓░░░░░░░░░░░░░░░░░░░░██▓▓                          
-#   ████░░░░░░░░████████████████                          
-#   ▒▒▒▒██░░████████████████▒▒▒▒                          
-#   ▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒░░░░▒▒░░░░▒▒                          
-#     ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒     
-
-
 ###########################
 ## Classes and Variables ##
 ###########################
@@ -292,10 +268,10 @@ def take_order():
 
     while more != False:
         if count == 0:
-            print(f"\nWhat can I get you started with, {newOrd.guestName}? (Enter x at any time to cancel your order) ")
+            print(f"\nWhat can I get you started with, {newOrd.guestName}? (Enter x to cancel your order)")
             print("\nOptions:\n")
             print(" 1. Burgers\n 2. Drinks\n 3. Sides\n 4. Combos")
-            selected_item = input("\nInput Option Number or Name: ")
+            selected_item = input("\nInput Option Number or Name: (Enter x to cancel order) ")
 
             while check_input(selected_item, 4, ["burgers", "drinks", "sides", "combos"]) == False:
                 selected_item = input("Please input a valid option: ")
